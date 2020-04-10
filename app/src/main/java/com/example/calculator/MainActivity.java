@@ -26,4 +26,28 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    public void advancedCalculator(View view){
+        Button advanced_button = findViewById(R.id.advanced_button);
+        advanced_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AdvancedActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    public void exit(View view){
+        Button exit_button = findViewById(R.id.exit_button);
+        exit_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                System.exit(0);
+            }
+        });
+
+    }
 }
