@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/basic_button"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="100dp"
+        android:text="Basic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calc_text" />
+
+    <Button
+        android:id="@+id/advanced_button"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="50dp"
+        android:text="Advanced"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/basic_button" />
+
+    <Button
+        android:id="@+id/about_button"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="50dp"
+        android:text="About author"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/advanced_button" />
+
+    <Button
+        android:id="@+id/exit_button"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="50dp"
+        android:text="Exit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/about_button" />
+
+    <TextView
+        android:id="@+id/calc_text"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:text="Calculator"
+        android:textAllCaps="false"
+        android:textIsSelectable="false"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="126dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
