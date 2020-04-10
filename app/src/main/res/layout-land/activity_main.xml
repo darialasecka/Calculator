@@ -11,12 +11,12 @@
         android:id="@+id/basic_button"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="70dp"
         android:background="#191919"
         android:onClick="basicCalculator"
         android:text="@string/basic"
         android:textColor="#D8D8D8"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/advanced_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calc_text" />
 
@@ -24,46 +24,45 @@
         android:id="@+id/advanced_button"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="70dp"
         android:background="#191919"
         android:onClick="advancedCalculator"
         android:text="@string/advanced"
         android:textColor="#D8D8D8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/basic_button" />
+        app:layout_constraintStart_toEndOf="@+id/basic_button"
+        app:layout_constraintTop_toBottomOf="@+id/calc_text" />
 
     <Button
         android:id="@+id/about_button"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:background="#191919"
         android:text="@string/about_author"
         android:textColor="#D8D8D8"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/exit_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/advanced_button" />
+        app:layout_constraintTop_toBottomOf="@+id/basic_button" />
 
     <Button
         android:id="@+id/exit_button"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:background="#191919"
         android:onClick="exit"
         android:text="@string/exit"
         android:textColor="#D8D8D8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/about_button" />
+        app:layout_constraintStart_toEndOf="@+id/about_button"
+        app:layout_constraintTop_toBottomOf="@+id/advanced_button" />
 
     <TextView
         android:id="@+id/calc_text"
         android:layout_width="160dp"
         android:layout_height="48dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="32dp"
         android:gravity="center"
         android:text="@string/calculator"
         android:textAllCaps="false"
@@ -72,6 +71,7 @@
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

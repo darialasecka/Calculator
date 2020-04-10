@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     public void advancedCalculator(View view){
@@ -36,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     public void exit(View view){
@@ -48,6 +46,5 @@ public class MainActivity extends AppCompatActivity {
                 System.exit(0);
             }
         });
-
     }
 }
