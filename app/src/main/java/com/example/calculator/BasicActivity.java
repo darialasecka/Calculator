@@ -20,6 +20,7 @@ public class BasicActivity extends AppCompatActivity {
     private boolean operation_made = false;
     private boolean commaAdded = false;
     private String error = "Error";
+    private boolean cleared = false;
 
     private void addToResult(String value){
         if(current_value.equals("0") || current_value.equals(error)) current_value = value;
@@ -35,6 +36,7 @@ public class BasicActivity extends AppCompatActivity {
 
     private void getNumber(View view){
         operation_made = false;
+        cleared = false;
         Button button = (Button) view;
         String value = button.getText().toString();
         addToResult(value);
@@ -43,6 +45,7 @@ public class BasicActivity extends AppCompatActivity {
     }
 
     private void addComma(){
+        cleared = false;
         if(!commaAdded){
             operation_made = false;
             if(current_value.equals("0") || current_value.equals(error)){
@@ -74,6 +77,7 @@ public class BasicActivity extends AppCompatActivity {
 
     private void count(View view){
         Button button = (Button) view;
+        cleared = false;
 
         if(operation_made){
             operation = button.getText().toString();
@@ -139,8 +143,21 @@ public class BasicActivity extends AppCompatActivity {
         operation = null;
         operation_made = false;
         commaAdded = false;
+        cleared = false;
         result.setText(current_value);
         expression.setText("");
+    }
+
+    private void clear(){
+        if(cleared) allClear();
+        else {
+            current_value = current_value.substring(0, current_value.length() - 1);
+            expr = expr.substring(0, expr.length() - 1);
+            if(current_value.length() == 0) current_value = "0";
+            result.setText(current_value);
+            expression.setText(expr);
+            cleared = true;
+        }
     }
 
     @Override
@@ -284,6 +301,14 @@ public class BasicActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 allClear();
+            }
+        });
+
+        final Button cce = findViewById(R.id.c_ce_button);
+        cce.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                clear();
             }
         });
 
