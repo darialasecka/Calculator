@@ -16,6 +16,7 @@ public class AdvancedActivity extends AppCompatActivity {
     private double rslt = 0;
     private TextView expression;
     private String operation = null;
+    private String prev_operation = null;
     private boolean operation_made = false;
     private boolean commaAdded = false;
     private String error = "Error";
@@ -85,41 +86,33 @@ public class AdvancedActivity extends AppCompatActivity {
         if(isDigit(expr.charAt(expr.length() - 1))) {
             operation_made = true;
             double value = Double.parseDouble(current_value);
-            if(operation == null) {
-                rslt = value;
-
-                operation = button.getText().toString();
-                expr += operation;
-
-                current_value = "0";
-                result.setText(current_value);
-                expression.setText(expr);
-                commaAdded = false;
-                return;
-            }
-
-            if(operation.equals("+")) {
-                rslt += value;
-            }
-            else if(operation.equals("-")){
-                rslt -= value;
-            }
-            else if(operation.equals("*")){
-                rslt *= value;
-            }
-            else if(operation.equals("/")){
-                if(value == 0){
-                    allClear();
-                    result.setText(error);
-                    return;
-                } else {
-                    rslt /= value;
+            if(operation == null)  rslt = value;
+            else {
+                if(operation.equals("+")) {
+                    rslt += value;
+                }
+                else if(operation.equals("-")){
+                    rslt -= value;
+                }
+                else if(operation.equals("*")){
+                    rslt *= value;
+                }
+                else if(operation.equals("/")){
+                    if(value == 0){
+                        allClear();
+                        result.setText(error);
+                        return;
+                    } else {
+                        rslt /= value;
+                    }
                 }
             }
+
 
             current_value = "0";
             result.setText(current_value);
 
+            //prev_operation = operation;
             operation = button.getText().toString();
             expr += operation;
             commaAdded = false;
@@ -127,8 +120,42 @@ public class AdvancedActivity extends AppCompatActivity {
         expression.setText(expr);
     }
 
+
+    //dokończyć procenty
+    private void countPercent(){
+        cleared = false;
+        if(isDigit(expr.charAt(expr.length() - 1))) {
+            double value = Double.parseDouble(current_value);
+
+            double prc = value * 0.01;
+            if(operation == null)  rslt = prc;
+            //12+50% = 18 , 12-25% = 9, 12*25% = 3, 12/50% = 24,
+            else{
+                if(operation.equals("+")){
+                    rslt += rslt * prc;
+                }
+                else if(operation.equals("-")){
+                    rslt -= rslt * prc;
+                }
+                else if(operation.equals("*")){
+                    rslt *= prc;
+                }
+                else if(operation.equals("/")){
+                    rslt /= prc;
+                }
+            }
+            current_value = "0";
+            result.setText(current_value);
+
+            expr += "%";
+            expression.setText(expr);
+
+            commaAdded = true; //right after percent, we don't want comma
+        }
+    }
     private void showResult(View view){
-        count(view);
+        if(expr.charAt(expr.length() - 1) == '%') countPercent();
+        else count(view);
         String temp = Double.toString(rslt);
         if(result.getText().equals(error)) temp = error;
         allClear();
@@ -166,7 +193,7 @@ public class AdvancedActivity extends AppCompatActivity {
         result = findViewById(R.id.result);
         expression = findViewById(R.id.expression);
 
-
+        //numbers
         final Button button1 = findViewById(R.id.button1);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -247,6 +274,7 @@ public class AdvancedActivity extends AppCompatActivity {
             }
         });
 
+        //operations
         final Button pm = findViewById(R.id.pm_button);
         pm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -284,6 +312,14 @@ public class AdvancedActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 count(view);
+            }
+        });
+
+        final Button percent = findViewById(R.id.percent_button);
+        percent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                countPercent();
             }
         });
 

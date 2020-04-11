@@ -86,35 +86,25 @@ public class BasicActivity extends AppCompatActivity {
         if(isDigit(expr.charAt(expr.length() - 1))) {
             operation_made = true;
             double value = Double.parseDouble(current_value);
-            if(operation == null) {
-                rslt = value;
-
-                operation = button.getText().toString();
-                expr += operation;
-
-                current_value = "0";
-                result.setText(current_value);
-                expression.setText(expr);
-                commaAdded = false;
-                return;
-            }
-
-            if(operation.equals("+")) {
-                rslt += value;
-            }
-            else if(operation.equals("-")){
-                rslt -= value;
-            }
-            else if(operation.equals("*")){
-                rslt *= value;
-            }
-            else if(operation.equals("/")){
-                if(value == 0){
-                    allClear();
-                    result.setText(error);
-                    return;
-                } else {
-                    rslt /= value;
+            if(operation == null)  rslt = value;
+            else {
+                if(operation.equals("+")) {
+                    rslt += value;
+                }
+                else if(operation.equals("-")){
+                    rslt -= value;
+                }
+                else if(operation.equals("*")){
+                    rslt *= value;
+                }
+                else if(operation.equals("/")){
+                    if(value == 0){
+                        allClear();
+                        result.setText(error);
+                        return;
+                    } else {
+                        rslt /= value;
+                    }
                 }
             }
 
