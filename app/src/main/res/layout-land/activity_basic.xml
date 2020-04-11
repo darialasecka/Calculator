@@ -49,7 +49,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#2D2D2D"
-                android:text="C/CE"
+                android:text="@string/c_ce"
                 android:textColor="#D8D8D8" />
 
             <Button
@@ -58,7 +58,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1.2"
                 android:background="#2D2D2D"
-                android:text="+/-"
+                android:text="@string/pm"
                 android:textColor="#D8D8D8" />
 
         </LinearLayout>
@@ -75,7 +75,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#191919"
-                android:text="7"
+                android:text="@string/_7"
                 android:textColor="#D8D8D8"
                 android:textStyle="bold" />
 
@@ -85,7 +85,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#191919"
-                android:text="8"
+                android:text="@string/_8"
                 android:textColor="#D8D8D8"
                 android:textStyle="bold" />
 
@@ -95,7 +95,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#191919"
-                android:text="9"
+                android:text="@string/_9"
                 android:textColor="#D8D8D8"
                 android:textStyle="bold" />
 
@@ -105,7 +105,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#2D2D2D"
-                android:text="/"
+                android:text="@string/divide"
                 android:textColor="#03A9F4" />
         </LinearLayout>
 
@@ -121,7 +121,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#191919"
-                android:text="4"
+                android:text="@string/_4"
                 android:textColor="#D8D8D8"
                 android:textStyle="bold" />
 
@@ -131,7 +131,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#191919"
-                android:text="5"
+                android:text="@string/_5"
                 android:textColor="#D8D8D8"
                 android:textStyle="bold" />
 
@@ -141,7 +141,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#191919"
-                android:text="6"
+                android:text="@string/_6"
                 android:textColor="#D8D8D8"
                 android:textStyle="bold" />
 
@@ -151,7 +151,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#2D2D2D"
-                android:text="*"
+                android:text="@string/multiply"
                 android:textColor="#03A9F4" />
         </LinearLayout>
 
@@ -167,7 +167,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#191919"
-                android:text="1"
+                android:text="@string/_1"
                 android:textColor="#D8D8D8"
                 android:textStyle="bold" />
 
@@ -177,7 +177,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#191919"
-                android:text="2"
+                android:text="@string/_2"
                 android:textColor="#D8D8D8"
                 android:textStyle="bold" />
 
@@ -197,7 +197,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#2D2D2D"
-                android:text="-"
+                android:text="@string/minus"
                 android:textColor="#03A9F4" />
         </LinearLayout>
 
@@ -213,7 +213,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#191919"
-                android:text="0"
+                android:text="@string/_0"
                 android:textColor="#D8D8D8"
                 android:textStyle="bold" />
 
@@ -223,7 +223,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#191919"
-                android:text=","
+                android:text="@string/comma"
                 android:textColor="#D8D8D8" />
 
             <Button
@@ -232,16 +232,16 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#03A9F4"
-                android:text="="
+                android:text="@string/equals"
                 android:textColor="#D8D8D8" />
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/plus_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#2D2D2D"
-                android:text="+"
+                android:text="@string/plus"
                 android:textColor="#03A9F4" />
         </LinearLayout>
 

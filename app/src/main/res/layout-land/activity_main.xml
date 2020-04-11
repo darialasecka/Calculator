@@ -39,6 +39,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
         android:background="#191919"
+        android:onClick="authorInfo"
         android:text="@string/about_author"
         android:textColor="#D8D8D8"
         app:layout_constraintEnd_toStartOf="@+id/exit_button"

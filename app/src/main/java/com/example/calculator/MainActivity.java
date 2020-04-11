@@ -1,13 +1,17 @@
 package com.example.calculator;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -54,19 +58,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void authorInfo(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        // inflate the layout of the popup window
-        LayoutInflater inflater = (LayoutInflater)
-                getSystemService(LAYOUT_INFLATER_SERVICE);
+        final View layout = getLayoutInflater().inflate(R.layout.author_layout, null);
+        builder.setView(layout);
+        builder.show();
+
+
+        /*AlertDialog.Builder popup = new AlertDialog.Builder(this);
+
+        popup.setMessage("© Created by\\nDaria Lasecka 2020\\n\\nhttps://github.com/darialasecka");
+
+
+        Dialog dialog = popup.create();
+        dialog.show();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.background_dark);*/
+
+
+
+        //setContentView(R.layout.author_layout);
+        //
+
+        /*// inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.author_layout, null);
 
         // create the popup window
-        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+        int width = ViewGroup.LayoutParams.WRAP_CONTENT;
+        int height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height);
+        popupWindow.setFocusable(true);
 
         // show the popup window
-        // which view you pass in doesn't matter, it is only used for the window tolken
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
         // dismiss the popup window when touched
@@ -76,6 +99,6 @@ public class MainActivity extends AppCompatActivity {
                 popupWindow.dismiss();
                 return true;
             }
-        });
+        });*/
     }
 }

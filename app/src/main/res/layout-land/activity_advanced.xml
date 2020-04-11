@@ -22,7 +22,7 @@
             android:background="#2D2D2D"
             android:gravity="center_vertical|end"
             android:paddingRight="10sp"
-            android:text="@string/_0"
+            android:text="@string/result"
             android:textAllCaps="false"
             android:textColor="#D8D8D8"
             android:textSize="80sp"
@@ -37,7 +37,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -61,7 +61,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#2D2D2D"
-                        android:text="C/CE"
+                        android:text="@string/c_ce"
                         android:textColor="#D8D8D8" />
 
                     <Button
@@ -70,7 +70,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#2D2D2D"
-                        android:text="+/-"
+                        android:text="@string/pm"
                         android:textAllCaps="false"
                         android:textColor="#D8D8D8" />
 
@@ -80,7 +80,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#2D2D2D"
-                        android:text="%"
+                        android:text="@string/percent"
                         android:textColor="#D8D8D8" />
 
                 </LinearLayout>
@@ -97,7 +97,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#2D2D2D"
-                        android:text="ln"
+                        android:text="@string/ln"
                         android:textAllCaps="false"
                         android:textColor="#03A9F4" />
 
@@ -107,7 +107,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#2D2D2D"
-                        android:text="log"
+                        android:text="@string/log"
                         android:textAllCaps="false"
                         android:textColor="#03A9F4" />
 
@@ -117,7 +117,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#2D2D2D"
-                        android:text="x^2"
+                        android:text="@string/x_2"
                         android:textAllCaps="false"
                         android:textColor="#03A9F4" />
 
@@ -127,7 +127,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#2D2D2D"
-                        android:text="x^y"
+                        android:text="@string/x_y"
                         android:textAllCaps="false"
                         android:textColor="#03A9F4" />
                 </LinearLayout>
@@ -144,7 +144,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#2D2D2D"
-                        android:text="sin"
+                        android:text="@string/sin"
                         android:textAllCaps="false"
                         android:textColor="#03A9F4" />
 
@@ -154,7 +154,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#2D2D2D"
-                        android:text="cos"
+                        android:text="@string/cos"
                         android:textAllCaps="false"
                         android:textColor="#03A9F4" />
 
@@ -164,22 +164,21 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#2D2D2D"
-                        android:text="tan"
+                        android:text="@string/tan"
                         android:textAllCaps="false"
                         android:textColor="#03A9F4" />
 
                     <Button
-                        android:id="@+id/button"
+                        android:id="@+id/sqrt_button"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#2D2D2D"
-                        android:text="sqrt"
+                        android:text="@string/sqrt"
                         android:textAllCaps="false"
                         android:textColor="#03A9F4" />
 
                 </LinearLayout>
-
             </LinearLayout>
 
             <LinearLayout
@@ -200,7 +199,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#191919"
-                        android:text="7"
+                        android:text="@string/_7"
                         android:textColor="#D8D8D8"
                         android:textStyle="bold" />
 
@@ -210,7 +209,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#191919"
-                        android:text="8"
+                        android:text="@string/_8"
                         android:textColor="#D8D8D8"
                         android:textStyle="bold" />
 
@@ -220,7 +219,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#191919"
-                        android:text="9"
+                        android:text="@string/_9"
                         android:textColor="#D8D8D8"
                         android:textStyle="bold" />
 
@@ -230,7 +229,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#2D2D2D"
-                        android:text="/"
+                        android:text="@string/divide"
                         android:textColor="#03A9F4" />
                 </LinearLayout>
 
@@ -246,7 +245,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#191919"
-                        android:text="4"
+                        android:text="@string/_4"
                         android:textColor="#D8D8D8"
                         android:textStyle="bold" />
 
@@ -256,7 +255,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#191919"
-                        android:text="5"
+                        android:text="@string/_5"
                         android:textColor="#D8D8D8"
                         android:textStyle="bold" />
 
@@ -266,7 +265,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#191919"
-                        android:text="6"
+                        android:text="@string/_6"
                         android:textColor="#D8D8D8"
                         android:textStyle="bold" />
 
@@ -276,7 +275,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#2D2D2D"
-                        android:text="*"
+                        android:text="@string/multiply"
                         android:textColor="#03A9F4" />
                 </LinearLayout>
 
@@ -292,7 +291,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#191919"
-                        android:text="1"
+                        android:text="@string/_1"
                         android:textColor="#D8D8D8"
                         android:textStyle="bold" />
 
@@ -302,7 +301,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#191919"
-                        android:text="2"
+                        android:text="@string/_2"
                         android:textColor="#D8D8D8"
                         android:textStyle="bold" />
 
@@ -322,7 +321,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#2D2D2D"
-                        android:text="-"
+                        android:text="@string/minus"
                         android:textColor="#03A9F4" />
                 </LinearLayout>
 
@@ -338,7 +337,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#191919"
-                        android:text="0"
+                        android:text="@string/_0"
                         android:textColor="#D8D8D8"
                         android:textStyle="bold" />
 
@@ -348,7 +347,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#191919"
-                        android:text=","
+                        android:text="@string/comma"
                         android:textColor="#D8D8D8" />
 
                     <Button
@@ -357,16 +356,16 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#03A9F4"
-                        android:text="="
+                        android:text="@string/equals"
                         android:textColor="#D8D8D8" />
 
                     <Button
-                        android:id="@+id/button3"
+                        android:id="@+id/plus_button"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="#2D2D2D"
-                        android:text="+"
+                        android:text="@string/plus"
                         android:textColor="#03A9F4" />
 
                 </LinearLayout>
@@ -374,5 +373,4 @@
         </LinearLayout>
 
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
