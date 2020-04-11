@@ -18,16 +18,17 @@ public class BasicActivity extends AppCompatActivity {
     private TextView expression;
     private String operation = null;
     private boolean operation_made = false;
+    private boolean commaAdded = false;
+    private String error = "Error";
 
     private void addToResult(String value){
-        if(current_value.equals("0")) current_value = value;
+        if(current_value.equals("0") || current_value.equals(error)) current_value = value;
         else current_value += value;
         result.setText(current_value);
-        System.out.println("curr: " + current_value);
     }
 
     private void addToExpression(String value){
-        if(expr.equals("0")) expr = value;
+        if(expr.equals("0") || expr.equals(error)) expr = value;
         else expr += value;
         expression.setText(expr);
     }
@@ -39,6 +40,21 @@ public class BasicActivity extends AppCompatActivity {
         addToResult(value);
         addToExpression(value);
 
+    }
+
+    private void addComma(){
+        if(!commaAdded){
+            operation_made = false;
+            if(current_value.equals("0") || current_value.equals(error)){
+                addToResult("0.");
+                addToExpression("0.");
+            }
+            else{
+                addToResult(".");
+                addToExpression(".");
+            }
+            commaAdded = true;
+        }
     }
 
     private void changeSign(){
@@ -68,13 +84,14 @@ public class BasicActivity extends AppCompatActivity {
             double value = Double.parseDouble(current_value);
             if(operation == null) {
                 rslt = value;
-                System.out.println(Double.parseDouble("1") + " " + value + " " + rslt);
 
                 operation = button.getText().toString();
                 expr += operation;
 
                 current_value = "0";
                 result.setText(current_value);
+                expression.setText(expr);
+                commaAdded = false;
                 return;
             }
 
@@ -89,7 +106,9 @@ public class BasicActivity extends AppCompatActivity {
             }
             else if(operation.equals("/")){
                 if(value == 0){
-
+                    allClear();
+                    result.setText(error);
+                    return;
                 } else {
                     rslt /= value;
                 }
@@ -98,17 +117,30 @@ public class BasicActivity extends AppCompatActivity {
             current_value = "0";
             result.setText(current_value);
 
-            System.out.println(rslt);
             operation = button.getText().toString();
             expr += operation;
+            commaAdded = false;
         }
         expression.setText(expr);
     }
 
-    private void showResult(){
-        expression.setText("");
-        result.setText(Double.toString(rslt));
+    private void showResult(View view){
+        count(view);
+        String temp = Double.toString(rslt);
+        if(result.getText().equals(error)) temp = error;
+        allClear();
+        result.setText(temp);
+    }
+
+    private void allClear(){
+        current_value = "0";
+        expr = "0";
+        rslt = 0;
+        operation = null;
         operation_made = false;
+        commaAdded = false;
+        result.setText(current_value);
+        expression.setText("");
     }
 
     @Override
@@ -231,13 +263,35 @@ public class BasicActivity extends AppCompatActivity {
             }
         });
 
+        final Button divide = findViewById(R.id.divide_button);
+        divide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                count(view);
+            }
+        });
+
         final Button equals = findViewById(R.id.equals_button);
         equals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                count(view);
-                operation = null;
-                showResult();
+                showResult(view);
+            }
+        });
+
+        final Button ac = findViewById(R.id.ac_button);
+        ac.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                allClear();
+            }
+        });
+
+        final Button comma = findViewById(R.id.comma_button);
+        comma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addComma();
             }
         });
     }
