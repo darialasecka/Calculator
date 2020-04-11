@@ -320,4 +320,33 @@ public class BasicActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("current_value", current_value);
+        outState.putString("expr", expr);
+        outState.putDouble("rslt", rslt);
+        outState.putString("result", result.getText().toString());
+        outState.putString("expression", expression.getText().toString());
+        outState.putString("operation", operation);
+        outState.putBoolean("operation_made", operation_made);
+        outState.putBoolean("commaAdded", commaAdded);
+        outState.putBoolean("cleared", cleared);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        current_value = savedInstanceState.getString("current_value");
+        expr = savedInstanceState.getString("expr");
+        rslt = savedInstanceState.getDouble("rslt");
+        result.setText(savedInstanceState.getString("result"));
+        expression.setText(savedInstanceState.getString("expression"));
+        operation = savedInstanceState.getString("operation");
+        operation_made = savedInstanceState.getBoolean("operation_made");
+        commaAdded = savedInstanceState.getBoolean("commaAdded");
+        cleared = savedInstanceState.getBoolean("cleared");
+    }
 }
