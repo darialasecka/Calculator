@@ -16,13 +16,14 @@ public class BasicActivity extends AppCompatActivity {
     private TextView result;
     private double rslt = 0;
     private TextView expression;
-    private String operation = new String();
+    private String operation = null;
     private boolean operation_made = false;
 
     private void addToResult(String value){
         if(current_value.equals("0")) current_value = value;
         else current_value += value;
         result.setText(current_value);
+        System.out.println("curr: " + current_value);
     }
 
     private void addToExpression(String value){
@@ -64,29 +65,50 @@ public class BasicActivity extends AppCompatActivity {
         }
         if(isDigit(expr.charAt(expr.length() - 1))) {
             operation_made = true;
-            
+            double value = Double.parseDouble(current_value);
             if(operation == null) {
-                rslt = Double.parseDouble(current_value);
+                rslt = value;
+                System.out.println(Double.parseDouble("1") + " " + value + " " + rslt);
+
+                operation = button.getText().toString();
+                expr += operation;
+
+                current_value = "0";
+                result.setText(current_value);
                 return;
             }
 
             if(operation.equals("+")) {
-                rslt += Double.parseDouble(current_value);
+                rslt += value;
             }
             else if(operation.equals("-")){
-                rslt -= Double.parseDouble(current_value);
+                rslt -= value;
             }
             else if(operation.equals("*")){
-                rslt *= Double.parseDouble(current_value);
+                rslt *= value;
             }
+            else if(operation.equals("/")){
+                if(value == 0){
 
-            operation = button.getText().toString();
-            expr += operation;
+                } else {
+                    rslt /= value;
+                }
+            }
 
             current_value = "0";
             result.setText(current_value);
+
+            System.out.println(rslt);
+            operation = button.getText().toString();
+            expr += operation;
         }
         expression.setText(expr);
+    }
+
+    private void showResult(){
+        expression.setText("");
+        result.setText(Double.toString(rslt));
+        operation_made = false;
     }
 
     @Override
@@ -206,6 +228,16 @@ public class BasicActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 count(view);
+            }
+        });
+
+        final Button equals = findViewById(R.id.equals_button);
+        equals.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                count(view);
+                operation = null;
+                showResult();
             }
         });
     }
