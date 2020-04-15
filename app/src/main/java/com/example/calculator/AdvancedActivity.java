@@ -18,7 +18,7 @@ public class AdvancedActivity extends AppCompatActivity {
     private double rslt = 0;
     private TextView expression;
     private String operation = null;
-    private String last_adv_operation = null;
+    private boolean last_adv_operation = false;
     private boolean operation_made = false;
     private boolean commaAdded = false;
     private String error = "Error";
@@ -78,20 +78,18 @@ public class AdvancedActivity extends AppCompatActivity {
     }
 
     private void count(View view){
-
         Button button = (Button) view;
         cleared = false;
-
 
         if(operation_made){
             operation = button.getText().toString();
             expr = expr.substring(0, expr.length() - 1) + operation;
         }
 
-        if(last_adv_operation != null){ //jak wykona się advanced operation to musi pobrać nową operację
+        if(last_adv_operation){ //jak wykona się advanced operation to musi pobrać nową operację
             operation = button.getText().toString();
             expr += operation;
-            last_adv_operation = null;
+            last_adv_operation = false;
         }
         //System.out.println(rslt + " " + operation);
 
@@ -123,7 +121,6 @@ public class AdvancedActivity extends AppCompatActivity {
                 }
             }
 
-            last_adv_operation = null;
             current_value = "0";
             result.setText(current_value);
 
@@ -135,89 +132,78 @@ public class AdvancedActivity extends AppCompatActivity {
         }
         expression.setText(expr);
 
-        System.out.println(rslt);
+        //System.out.println(rslt);
     }
     
     private void countAdvanced(String adv_operation){
         cleared = false;
 
         if(isDigit(expr.charAt(expr.length() - 1))) {
+            last_adv_operation = true;
+
             double value = Double.parseDouble(current_value);
 
             //System.out.println(adv_operation);
+            double advanced_result = 0;
 
             switch (adv_operation) {
                 case "%":
                     //12+50% = 18 , 12-25% = 9, 12*25% = 3, 12/50% = 24,
-                    double prc = value * 0.01;
-                    if(operation == null)  rslt = prc;
+                    advanced_result = value * 0.01;
 
-                    else if(operation.equals("+")){
-                        rslt += rslt * prc;
-                    }
-                    else if(operation.equals("-")){
-                        rslt -= rslt * prc;
-                    }
-                    else if(operation.equals("*")){
-                        rslt *= prc;
-                    }
-                    else if(operation.equals("/")){
-                        rslt /= prc;
-                    }
                     expr += "%";
-                    last_adv_operation = "%";
 
                     break;
 
                 case "sin":
-                    double sin = Math.sin(Math.toRadians(value));
-
-                    if(operation == null)  rslt = sin;
-                    else if(operation.equals("+")){
-                        rslt += sin;
-                    }
-                    else if(operation.equals("-")){
-                        rslt -= sin;
-                    }
-                    else if(operation.equals("*")){
-                        rslt *= sin;
-                    }
-                    else if(operation.equals("/")){
-                        rslt /= sin;
-                    }
+                    advanced_result = Math.sin(Math.toRadians(value));
 
                     expr = expr.substring(0, expr.length() - current_value.length());
-
                     expr += "sin(" + value + ")";
-                    last_adv_operation = "sin";
 
                     break;
 
                 case "cos":
-                    double cos = Math.cos(Math.toRadians(value));
-
-                    if(operation == null)  rslt = cos;
-                    else if(operation.equals("+")){
-                        rslt += cos;
-                    }
-                    else if(operation.equals("-")){
-                        rslt -= cos;
-                    }
-                    else if(operation.equals("*")){
-                        rslt *= cos;
-                    }
-                    else if(operation.equals("/")){
-                        rslt /= cos;
-                    }
+                    advanced_result = Math.cos(Math.toRadians(value));
 
                     expr = expr.substring(0, expr.length() - current_value.length());
-
                     expr += "cos(" + value + ")";
-                    last_adv_operation = "cos";
+
+                    break;
+
+                case "tan":
+                    advanced_result = Math.tan(Math.toRadians(value)); //unfortunately for me tan(45) is 0.9999999, so I think it works, but floating point error doesn't shows it xd
+
+                    expr = expr.substring(0, expr.length() - current_value.length());
+                    expr += "tan(" + value + ")";
+
+                    break;
+
+                case "sqrt":
+                    advanced_result = Math.sqrt(value); //unfortunately for me tan(45) is 0.9999999, so I think it works, but floating point error doesn't shows it xd
+
+                    expr = expr.substring(0, expr.length() - current_value.length());
+                    expr += "sqrt(" + value + ")";
 
                     break;
 
             }
+
+            if(operation == null)  rslt = advanced_result;
+            else if(operation.equals("+")){
+                rslt += advanced_result;
+            }
+            else if(operation.equals("-")){
+                rslt -= advanced_result;
+            }
+            else if(operation.equals("*")){
+                rslt *= advanced_result;
+            }
+            else if(operation.equals("/")){
+                rslt /= advanced_result;
+            }
+
+            //System.out.println(rslt);
 
             current_value = "0";
             result.setText(current_value);
@@ -240,7 +226,7 @@ public class AdvancedActivity extends AppCompatActivity {
         expr = "0";
         rslt = 0;
         operation = null;
-        last_adv_operation = null;
+        last_adv_operation = false;
         operation_made = false;
         commaAdded = false;
         cleared = false;
@@ -413,6 +399,23 @@ public class AdvancedActivity extends AppCompatActivity {
             }
         });
 
+        final Button tan = findViewById(R.id.tan_button);
+        tan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                countAdvanced("tan");
+            }
+        });
+
+        final Button sqrt = findViewById(R.id.sqrt_button);
+        sqrt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                countAdvanced("sqrt");
+            }
+        });
+
+
         final Button equals = findViewById(R.id.equals_button);
         equals.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -421,6 +424,7 @@ public class AdvancedActivity extends AppCompatActivity {
             }
         });
 
+        //other
         final Button ac = findViewById(R.id.ac_button);
         ac.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -455,7 +459,7 @@ public class AdvancedActivity extends AppCompatActivity {
         outState.putString("result", result.getText().toString());
         outState.putString("expression", expression.getText().toString());
         outState.putString("operation", operation);
-        outState.putString("last_adv_operation", last_adv_operation);
+        outState.putBoolean("last_adv_operation", last_adv_operation);
         outState.putBoolean("operation_made", operation_made);
         outState.putBoolean("commaAdded", commaAdded);
         outState.putBoolean("cleared", cleared);
@@ -471,7 +475,7 @@ public class AdvancedActivity extends AppCompatActivity {
         result.setText(savedInstanceState.getString("result"));
         expression.setText(savedInstanceState.getString("expression"));
         operation = savedInstanceState.getString("operation");
-        last_adv_operation = savedInstanceState.getString("last_adv_operation");
+        last_adv_operation = savedInstanceState.getBoolean("last_adv_operation");
         operation_made = savedInstanceState.getBoolean("operation_made");
         commaAdded = savedInstanceState.getBoolean("commaAdded");
         cleared = savedInstanceState.getBoolean("cleared");
