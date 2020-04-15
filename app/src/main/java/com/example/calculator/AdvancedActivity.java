@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 import static java.lang.Character.isDigit;
 
 
@@ -125,10 +127,10 @@ public class AdvancedActivity extends AppCompatActivity {
                 }
             }
 
-            if(Double.toString(rslt).contains("NaN") || Double.toString(rslt).contains("Infinity")) result.setText(error);
-
             current_value = "0";
             result.setText(current_value);
+
+            if(Double.toString(rslt).contains("NaN") || Double.toString(rslt).contains("Infinity")) result.setText(error);
 
             //prev_operation = operation;
             operation = button.getText().toString();
@@ -194,7 +196,7 @@ public class AdvancedActivity extends AppCompatActivity {
                     break;
 
                 case "log":
-                    advanced_result = Math.log(value);
+                    advanced_result = Math.log10(value);
 
                     expr = expr.substring(0, expr.length() - current_value.length());
                     expr += "log(" + value + ")";
@@ -202,7 +204,7 @@ public class AdvancedActivity extends AppCompatActivity {
                     break;
 
                 case "ln":
-                    advanced_result = Math.log10(value);
+                    advanced_result = Math.log(value);
 
                     expr = expr.substring(0, expr.length() - current_value.length());
                     expr += "ln(" + value + ")";
@@ -236,6 +238,8 @@ public class AdvancedActivity extends AppCompatActivity {
             current_value = "0";
             result.setText(current_value);
 
+            if(Double.toString(rslt).contains("NaN") || Double.toString(rslt).contains("Infinity")) result.setText(error);
+
             expression.setText(expr);
 
             commaAdded = true; //right after advanced operation, we don't want comma
@@ -244,7 +248,8 @@ public class AdvancedActivity extends AppCompatActivity {
 
     private void showResult(View view){
         count(view);
-        String temp = Double.toString(rslt);
+        DecimalFormat df = new DecimalFormat("#.#####");
+        String temp = df.format(rslt);
         if(result.getText().equals(error)) temp = error;
         allClear();
         result.setText(temp);
