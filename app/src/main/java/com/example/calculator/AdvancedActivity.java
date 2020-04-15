@@ -90,7 +90,7 @@ public class AdvancedActivity extends AppCompatActivity {
             expr += operation;
             last_adv_operation = null;
         }
-        System.out.println(rslt + " " + operation);
+        //System.out.println(rslt + " " + operation);
 
         if(isDigit(expr.charAt(expr.length() - 1))) {
             operation_made = true;
@@ -133,61 +133,70 @@ public class AdvancedActivity extends AppCompatActivity {
         expression.setText(expr);
     }
     
-    private void countAdvanced(/*View view, */String adv_operation){
+    private void countAdvanced(String adv_operation){
         cleared = false;
-       /*if(view != null){
-           Button button = (Button) view;
-           adv_operation = button.getText().toString();
-       }*/
 
         if(isDigit(expr.charAt(expr.length() - 1))) {
             double value = Double.parseDouble(current_value);
 
-            //System.out.println(operation);
+            System.out.println(adv_operation);
 
-            if(adv_operation == "%") {
-                //12+50% = 18 , 12-25% = 9, 12*25% = 3, 12/50% = 24,
-                double prc = value * 0.01;
-                if(operation == null)  rslt = prc;
+            switch (adv_operation){
+                case "%":
+                    //12+50% = 18 , 12-25% = 9, 12*25% = 3, 12/50% = 24,
+                    double prc = value * 0.01;
+                    if(operation == null)  rslt = prc;
 
-                else if(operation.equals("+")){
-                    rslt += rslt * prc;
-                }
-                else if(operation.equals("-")){
-                    rslt -= rslt * prc;
-                }
-                else if(operation.equals("*")){
-                    rslt *= prc;
-                }
-                else if(operation.equals("/")){
-                    rslt /= prc;
-                }
-                expr += "%";
-                last_adv_operation = "%";
+                    else if(operation.equals("+")){
+                        rslt += rslt * prc;
+                    }
+                    else if(operation.equals("-")){
+                        rslt -= rslt * prc;
+                    }
+                    else if(operation.equals("*")){
+                        rslt *= prc;
+                    }
+                    else if(operation.equals("/")){
+                        rslt /= prc;
+                    }
+                    expr += "%";
+                    last_adv_operation = "%";
+                    break;
+                case "sin":
+                    double sin = Math.sin(Math.toRadians(value));
+
+                    if(operation == null)  rslt = sin;
+                    else if(operation.equals("+")){
+                        rslt += sin;
+                    }
+                    else if(operation.equals("-")){
+                        rslt -= sin;
+                    }
+                    else if(operation.equals("*")){
+                        rslt *= sin;
+                    }
+                    else if(operation.equals("/")){
+                        rslt /= sin;
+                    }
+
+                    expr = expr.substring(0, expr.length() - current_value.length());
+                    
+                    expr += "sin(" + value + ")";
+                    last_adv_operation = "sin";
+
+                    break;
+
+            }
+            /*if(adv_operation == "%") {
+
             }
             else if(adv_operation.equals("sin")) {
-                double sin = Math.toRadians(value);
 
-                if(operation.equals("+")){
-                    rslt += rslt * sin;
-                }
-                else if(operation.equals("-")){
-                    rslt -= rslt * sin;
-                }
-                else if(operation.equals("*")){
-                    rslt *= sin;
-                }
-                else if(operation.equals("/")){
-                    rslt /= sin;
-                }
-                expr += "sin(" + value + ")";
-                last_adv_operation = "sin";
-            }
+            }*/
 
 
             current_value = "0";
             result.setText(current_value);
-
 
             expression.setText(expr);
 
@@ -195,7 +204,8 @@ public class AdvancedActivity extends AppCompatActivity {
         }
     }
     private void showResult(View view){
-        if(last_adv_operation == "%") countAdvanced(/*null,*/ "%");
+        if(last_adv_operation == "%") countAdvanced("%");
+        if(last_adv_operation.equals("sin")) countAdvanced("sin");
         //dołożyć do reszty
         else count(view);
         String temp = Double.toString(rslt);
