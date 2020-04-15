@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import static java.lang.Character.isDigit;
 
+
+//zmienjszać czcionkę, żeby zmieścić cały wynik
 public class AdvancedActivity extends AppCompatActivity {
     private String current_value = "0";
     private String expr = "0";
@@ -180,32 +182,49 @@ public class AdvancedActivity extends AppCompatActivity {
                     }
 
                     expr = expr.substring(0, expr.length() - current_value.length());
-                    
+
                     expr += "sin(" + value + ")";
                     last_adv_operation = "sin";
 
                     break;
+                case "cos":
+                    double cos = Math.cos(Math.toRadians(value));
+
+                    if(operation == null)  rslt = cos;
+                    else if(operation.equals("+")){
+                        rslt += cos;
+                    }
+                    else if(operation.equals("-")){
+                        rslt -= cos;
+                    }
+                    else if(operation.equals("*")){
+                        rslt *= cos;
+                    }
+                    else if(operation.equals("/")){
+                        rslt /= cos;
+                    }
+
+                    expr = expr.substring(0, expr.length() - current_value.length());
+
+                    expr += "cos(" + value + ")";
+                    last_adv_operation = "cos";
+
+                    break;
 
             }
-            /*if(adv_operation == "%") {
-
-            }
-            else if(adv_operation.equals("sin")) {
-
-            }*/
-
 
             current_value = "0";
             result.setText(current_value);
 
             expression.setText(expr);
 
-            commaAdded = true; //right after percent, we don't want comma
+            commaAdded = true; //right after advanced operation, we don't want comma
         }
     }
     private void showResult(View view){
         if(last_adv_operation == "%") countAdvanced("%");
         if(last_adv_operation.equals("sin")) countAdvanced("sin");
+        if(last_adv_operation.equals("cos")) countAdvanced("cos");
         //dołożyć do reszty
         else count(view);
         String temp = Double.toString(rslt);
@@ -384,6 +403,14 @@ public class AdvancedActivity extends AppCompatActivity {
             }
         });
 
+        final Button cos = findViewById(R.id.cos_button);
+        cos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                countAdvanced("cos");
+            }
+        });
+
         final Button equals = findViewById(R.id.equals_button);
         equals.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -426,6 +453,7 @@ public class AdvancedActivity extends AppCompatActivity {
         outState.putString("result", result.getText().toString());
         outState.putString("expression", expression.getText().toString());
         outState.putString("operation", operation);
+        outState.putString("last_adv_operation", last_adv_operation);
         outState.putBoolean("operation_made", operation_made);
         outState.putBoolean("commaAdded", commaAdded);
         outState.putBoolean("cleared", cleared);
@@ -441,6 +469,7 @@ public class AdvancedActivity extends AppCompatActivity {
         result.setText(savedInstanceState.getString("result"));
         expression.setText(savedInstanceState.getString("expression"));
         operation = savedInstanceState.getString("operation");
+        last_adv_operation = savedInstanceState.getString("last_adv_operation");
         operation_made = savedInstanceState.getBoolean("operation_made");
         commaAdded = savedInstanceState.getBoolean("commaAdded");
         cleared = savedInstanceState.getBoolean("cleared");
