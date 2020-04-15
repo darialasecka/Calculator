@@ -40,8 +40,10 @@
             android:text="@string/_0"
             android:textAllCaps="false"
             android:textColor="#D8D8D8"
-            android:textSize="70sp"
-            android:textStyle="bold" />
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:autoSizeMaxTextSize="70sp"
+            app:autoSizeMinTextSize="12sp" />
 
         <LinearLayout
             android:layout_width="match_parent"

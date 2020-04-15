@@ -41,8 +41,12 @@
             android:text="@string/_0"
             android:textAllCaps="false"
             android:textColor="#D8D8D8"
-            android:textSize="80sp"
-            android:textStyle="bold" />
+            android:textSize="42sp"
+            android:textStyle="bold"
+            app:autoSizeMaxTextSize="80sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeStepGranularity="2sp"
+            app:autoSizeTextType="uniform" />
 
         <LinearLayout
             android:layout_width="match_parent"
