@@ -78,6 +78,7 @@ public class AdvancedActivity extends AppCompatActivity {
     }
 
     private void count(View view){
+
         Button button = (Button) view;
         cleared = false;
 
@@ -87,7 +88,7 @@ public class AdvancedActivity extends AppCompatActivity {
             expr = expr.substring(0, expr.length() - 1) + operation;
         }
 
-        if(last_adv_operation != null){ //jak wykona się advanced operation to musi pobrać operacje
+        if(last_adv_operation != null){ //jak wykona się advanced operation to musi pobrać nową operację
             operation = button.getText().toString();
             expr += operation;
             last_adv_operation = null;
@@ -133,6 +134,8 @@ public class AdvancedActivity extends AppCompatActivity {
             commaAdded = false;
         }
         expression.setText(expr);
+
+        System.out.println(rslt);
     }
     
     private void countAdvanced(String adv_operation){
@@ -141,9 +144,9 @@ public class AdvancedActivity extends AppCompatActivity {
         if(isDigit(expr.charAt(expr.length() - 1))) {
             double value = Double.parseDouble(current_value);
 
-            System.out.println(adv_operation);
+            //System.out.println(adv_operation);
 
-            switch (adv_operation){
+            switch (adv_operation) {
                 case "%":
                     //12+50% = 18 , 12-25% = 9, 12*25% = 3, 12/50% = 24,
                     double prc = value * 0.01;
@@ -163,7 +166,9 @@ public class AdvancedActivity extends AppCompatActivity {
                     }
                     expr += "%";
                     last_adv_operation = "%";
+
                     break;
+
                 case "sin":
                     double sin = Math.sin(Math.toRadians(value));
 
@@ -187,6 +192,7 @@ public class AdvancedActivity extends AppCompatActivity {
                     last_adv_operation = "sin";
 
                     break;
+
                 case "cos":
                     double cos = Math.cos(Math.toRadians(value));
 
@@ -222,11 +228,7 @@ public class AdvancedActivity extends AppCompatActivity {
         }
     }
     private void showResult(View view){
-        if(last_adv_operation == "%") countAdvanced("%");
-        if(last_adv_operation.equals("sin")) countAdvanced("sin");
-        if(last_adv_operation.equals("cos")) countAdvanced("cos");
-        //dołożyć do reszty
-        else count(view);
+        count(view);
         String temp = Double.toString(rslt);
         if(result.getText().equals(error)) temp = error;
         allClear();
