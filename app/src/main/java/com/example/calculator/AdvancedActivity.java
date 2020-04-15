@@ -16,7 +16,7 @@ public class AdvancedActivity extends AppCompatActivity {
     private double rslt = 0;
     private TextView expression;
     private String operation = null;
-    private String prev_operation = null;
+    private String last_adv_operation = null;
     private boolean operation_made = false;
     private boolean commaAdded = false;
     private String error = "Error";
@@ -79,15 +79,27 @@ public class AdvancedActivity extends AppCompatActivity {
         Button button = (Button) view;
         cleared = false;
 
+
         if(operation_made){
             operation = button.getText().toString();
             expr = expr.substring(0, expr.length() - 1) + operation;
         }
+
+        if(last_adv_operation != null){ //jak wykona się advanced operation to musi pobrać operacje
+            operation = button.getText().toString();
+            expr += operation;
+            last_adv_operation = null;
+        }
+        System.out.println(rslt + " " + operation);
+
         if(isDigit(expr.charAt(expr.length() - 1))) {
             operation_made = true;
+
             double value = Double.parseDouble(current_value);
+
             if(operation == null)  rslt = value;
             else {
+
                 if(operation.equals("+")) {
                     rslt += value;
                 }
@@ -108,30 +120,37 @@ public class AdvancedActivity extends AppCompatActivity {
                 }
             }
 
-
+            last_adv_operation = null;
             current_value = "0";
             result.setText(current_value);
 
             //prev_operation = operation;
             operation = button.getText().toString();
             expr += operation;
+
             commaAdded = false;
         }
         expression.setText(expr);
     }
-
-
-    //dokończyć procenty
-    private void countPercent(){
+    
+    private void countAdvanced(/*View view, */String adv_operation){
         cleared = false;
+       /*if(view != null){
+           Button button = (Button) view;
+           adv_operation = button.getText().toString();
+       }*/
+
         if(isDigit(expr.charAt(expr.length() - 1))) {
             double value = Double.parseDouble(current_value);
 
-            double prc = value * 0.01;
-            if(operation == null)  rslt = prc;
-            //12+50% = 18 , 12-25% = 9, 12*25% = 3, 12/50% = 24,
-            else{
-                if(operation.equals("+")){
+            //System.out.println(operation);
+
+            if(adv_operation == "%") {
+                //12+50% = 18 , 12-25% = 9, 12*25% = 3, 12/50% = 24,
+                double prc = value * 0.01;
+                if(operation == null)  rslt = prc;
+
+                else if(operation.equals("+")){
                     rslt += rslt * prc;
                 }
                 else if(operation.equals("-")){
@@ -143,18 +162,41 @@ public class AdvancedActivity extends AppCompatActivity {
                 else if(operation.equals("/")){
                     rslt /= prc;
                 }
+                expr += "%";
+                last_adv_operation = "%";
             }
+            else if(adv_operation.equals("sin")) {
+                double sin = Math.toRadians(value);
+
+                if(operation.equals("+")){
+                    rslt += rslt * sin;
+                }
+                else if(operation.equals("-")){
+                    rslt -= rslt * sin;
+                }
+                else if(operation.equals("*")){
+                    rslt *= sin;
+                }
+                else if(operation.equals("/")){
+                    rslt /= sin;
+                }
+                expr += "sin(" + value + ")";
+                last_adv_operation = "sin";
+            }
+
+
             current_value = "0";
             result.setText(current_value);
 
-            expr += "%";
+
             expression.setText(expr);
 
             commaAdded = true; //right after percent, we don't want comma
         }
     }
     private void showResult(View view){
-        if(expr.charAt(expr.length() - 1) == '%') countPercent();
+        if(last_adv_operation == "%") countAdvanced(/*null,*/ "%");
+        //dołożyć do reszty
         else count(view);
         String temp = Double.toString(rslt);
         if(result.getText().equals(error)) temp = error;
@@ -167,6 +209,7 @@ public class AdvancedActivity extends AppCompatActivity {
         expr = "0";
         rslt = 0;
         operation = null;
+        last_adv_operation = null;
         operation_made = false;
         commaAdded = false;
         cleared = false;
@@ -319,7 +362,15 @@ public class AdvancedActivity extends AppCompatActivity {
         percent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                countPercent();
+                countAdvanced("%");
+            }
+        });
+
+        final Button sin = findViewById(R.id.sin_button);
+        sin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                countAdvanced("sin");
             }
         });
 
