@@ -248,7 +248,7 @@ public class AdvancedActivity extends AppCompatActivity {
 
     private void showResult(View view){
         count(view);
-        DecimalFormat df = new DecimalFormat("#.#####");
+        DecimalFormat df = new DecimalFormat("#.##########");
         String temp = df.format(rslt);
         if(result.getText().equals(error)) temp = error;
         allClear();

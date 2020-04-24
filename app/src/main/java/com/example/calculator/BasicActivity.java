@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 import static java.lang.Character.isDigit;
 
 public class BasicActivity extends AppCompatActivity {
@@ -120,7 +122,8 @@ public class BasicActivity extends AppCompatActivity {
 
     private void showResult(View view){
         count(view);
-        String temp = Double.toString(rslt);
+        DecimalFormat df = new DecimalFormat("#.##########");
+        String temp = df.format(rslt);
         if(result.getText().equals(error)) temp = error;
         allClear();
         result.setText(temp);
