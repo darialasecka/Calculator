@@ -124,6 +124,7 @@ public class AdvancedActivity extends AppCompatActivity {
                 //advanced
                 else if(operation.equals("x^y")){
                     rslt = Math.pow(rslt, value);
+                    operation = "^";
                 }
             }
 
@@ -180,8 +181,8 @@ public class AdvancedActivity extends AppCompatActivity {
                     break;
 
                 case "tan":
-                    advanced_result = Math.tan(Math.toRadians(value)); //unfortunately for me tan(45) is 0.9999999, so I think it works, but floating point error doesn't shows it xd
-
+                    advanced_result = Math.tan(Math.toRadians(value));
+                    
                     expr = expr.substring(0, expr.length() - current_value.length());
                     expr += "tan(" + value + ")";
 
