@@ -11,8 +11,6 @@ import java.text.DecimalFormat;
 
 import static java.lang.Character.isDigit;
 
-
-//zmienjszać czcionkę, żeby zmieścić cały wynik
 public class AdvancedActivity extends AppCompatActivity {
     private String current_value = "0";
     private String expr = "0";
@@ -182,7 +180,7 @@ public class AdvancedActivity extends AppCompatActivity {
 
                 case "tan":
                     advanced_result = Math.tan(Math.toRadians(value));
-                    
+
                     expr = expr.substring(0, expr.length() - current_value.length());
                     expr += "tan(" + value + ")";
 
